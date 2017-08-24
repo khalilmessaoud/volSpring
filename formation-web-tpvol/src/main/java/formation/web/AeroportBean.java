@@ -15,21 +15,39 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import vol.metier.dao.AeroportDao;
+import vol.metier.dao.AeroportVilleDao;
+import vol.metier.dao.VilleDao;
 import vol.metier.model.Aeroport;
+import vol.metier.model.AeroportVille;
+import vol.metier.model.Ville;
 
 @Component
 @Scope(value="request")
 public class AeroportBean {
 	
 	private Long aeroportId;
-	private Aeroport aeroport = new Aeroport();
+	private Long villeId;
 	
+	private Ville ville = new Ville();
+	private Aeroport aeroport = new Aeroport();
+	private AeroportVille aeroportVille = new AeroportVille();
+		
 	@Autowired
 	private AeroportDao aeroportDao;
+	
+	@Autowired
+	private VilleDao villeDao;
+	
+	@Autowired
+	private AeroportVilleDao aeroportVilleDao;
 	
 	// ACTION
 	public List<Aeroport> getAeroports() {
 		return aeroportDao.findAll();
+	}
+	
+	public List<Ville> getVilles() {
+		return villeDao.findAll();
 	}
 	
 	public String add() {
@@ -53,8 +71,12 @@ public class AeroportBean {
 	public String save() {
 		if ( aeroport.getId() != null) {
 			aeroportDao.update(aeroport);
+			aeroportVilleDao.update(aeroportVille);
+
 		}
-		else aeroportDao.create(aeroport);
+		else {
+			aeroportDao.create(aeroport);
+			}
 		
 		return "aeroports";
 	}
@@ -75,6 +97,22 @@ public class AeroportBean {
 
 	public void setAeroport(Aeroport aeroport) {
 		this.aeroport = aeroport;
+	}
+
+	public Long getVilleId() {
+		return villeId;
+	}
+
+	public void setVilleId(Long villeId) {
+		this.villeId = villeId;
+	}
+
+	public Ville getVille() {
+		return ville;
+	}
+
+	public void setVille(Ville ville) {
+		this.ville = ville;
 	}
 	
 		
