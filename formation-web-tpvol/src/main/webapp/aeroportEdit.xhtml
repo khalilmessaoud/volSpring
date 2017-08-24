@@ -12,14 +12,23 @@
 	<h:form id="formulaire">
 		<h:inputHidden id="id" value="#{aeroportBean.aeroport.id}" />
 		<h:inputHidden id="version" value="#{aeroportBean.aeroport.version}" />
-		<h:panelGrid columns="2">
-			<p:outputLabel for="nom" value="Nom" />
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nom" value="Nom :" />
+			
 			<p:inputText id="nom" value="#{aeroportBean.aeroport.nom}" required="true"
 				requiredMessage="Veuillez entrer un nom" />
-			<h:message for="nom" />
+			
+			<p:outputLabel for="ville" value="Ville : " />		
+			<p:selectOneListbox id="ville" value="#{aeroportBean.ville.id}" 
+					required="true" 
+					requiredMessage="Veuillez sélectionner une ville">
+					<f:selectItems value="#{aeroportBean.villes}" var="ville"
+						itemValue="#{ville.id}" itemLabel="#{ville.nom}" />
+			</p:selectOneListbox>
+			
 			<p:commandButton value="Sauvegarder l'aeroport"
 				action="#{aeroportBean.save}" ajax="false" />
-		</h:panelGrid>
+		</p:panelGrid>
 	</h:form>
 </h:body>
 </html>
