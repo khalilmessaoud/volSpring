@@ -66,7 +66,7 @@ public class AeroportDaoJpa implements AeroportDao {
 
 	@Override
 	public void delete(Aeroport aeroport) {
-		em.refresh(aeroport);
+		aeroport = em.merge(aeroport);
 		for (AeroportVille villeAeroport : aeroport.getVilles()) {
 			aeroportVilleDao.delete(villeAeroport);
 		}
