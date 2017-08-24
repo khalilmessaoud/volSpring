@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="Liste des villes" /></title>
+</h:head>
+<h:body>
+	<p:panel header="Liste des villes" />
+	<h:form id="formulaire">
+		<p:dataTable value="#{villeBean.villes}" var="ville">
+		
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{ville.id}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Nom" />
+				</f:facet>
+				<h:outputText value="#{ville.nom}" />
+			</p:column>
+			
+			 <p:column> 
+				<p:commandButton value="Editer la ville" action="#{villeBean.edit(ville.id)}" ajax="false"/>
+			</p:column>
+			<p:column> 
+				<p:commandButton value="Supprimer" action="#{ville.delete}"  ajax="false">
+					<f:setPropertyActionListener target="#{villeBean.villeId}"
+						value="#{ville.id}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:commandButton icon="ui-icon-plus" value="Nouvelle ville" action="#{villeBean.add}"  ajax="false"/>
+	</h:form>
+</h:body>
+</html>
