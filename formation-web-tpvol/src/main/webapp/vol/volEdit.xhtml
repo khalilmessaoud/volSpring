@@ -5,29 +5,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<f:facet name="header">
-        <p:graphicImage name="/formation-web-jsf\src\main\webapp\images\telechargement.jpg" />
-   	 	</f:facet>
-	<title><h:outputText value="#{msg['cieAerienneEdit.title']}" /></title>
+	
+	<title><h:outputText value="#{msg['volEdit.title']}" /></title>
 </h:head>
 <h:body>
 	<h2>
-		<h:outputText value="#{msg['cieAerienneEdit.title']}" />
+		<h:outputText value="#{msg['volEdit.title']}" />
 	</h2>
 	<h:form id="formulaire">
-		<h:inputHidden id="id" value="#{compagnieBean.compagnieAerienne.id}"/>
-		<h:inputHidden id="version" value="#{compagnieBean.compagnieAerienne.version}"/>
-		
-		
+		<h:inputHidden id="id" value="#{volBean.vol.id}"/>
+		<h:inputHidden id="version" value="#{volBean.vol.version}"/>	
 		<p:panelGrid >
-			<p:outputLabel for="nom" value="#{msg['cieAerienneEdit.nom']}" />
-			<p:inputText id="nom" value="#{compagnieBean.compagnieAerienne.nom}" required="true" requiredMessage="#{msg['cieAerienneEdit.nom.required']}"/>
-			<p:message for="nom"/>
+		
+			<p:outputLabel  for ="dateDepart" value="#{msg['volEdit.dateDepart']}" />
+			<p:inputText id="dateDepart" value="#{vol.dateDepart}" required="true" />
+			
+			<p:outputLabel for ="dateArrivee" value="#{msg['volEdit.dateArrivee']}" />
+			<p:inputText id="dateArrivee" value="vol.dateArrivee" required="true" />	
+			
+			<p:outputLabel for ="heureDepart" value="#{msg['volEdit.heureDepart']}" />
+			<p:inputText id="heureDepart" value="vol.heureDepart" required="true" />	
+		
+			<p:outputLabel for ="heureArrivee" value="#{msg['volEdit.heureArrivee']}" />
+			<p:inputText id="heureArrivee" value="vol.heureArrivee" required="true" />	
+			
+			<p:outputLabel for ="depart.nom" value="#{msg['volEdit.depart.nom']}" />
+			<p:inputText id="vol.depart.nom" value="vol.depart.nom" required="true" />	
+			
+			<p:outputLabel for ="arrivee.nom" value="#{msg['volEdit.arrivee.nom']}" />
+			<p:inputText id="vol.arrivee.nom" value="vol.arrivee.nom" required="true" />	
 			
 			
 			
 			
-			<p:commandButton value="#{msg['cieAerienneEdit.valid']}" action="#{compagnieBean.save}"/>
+			<p:commandButton value="#{msg['volEdit.valid']}" action="#{volBean.save}"/>
 		</p:panelGrid>
 	</h:form>
 </h:body>
