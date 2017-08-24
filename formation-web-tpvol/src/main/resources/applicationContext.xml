@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+
+
+	<bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="username" value="postgres" />
+		<property name="password" value="admin" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/formation-ibm" />
+	</bean>
+
+	<bean id="jdbcTemplateBean" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSourceBean" />
+	</bean>
+
+	<bean id="eleveDao" class="formation.dao.EleveDaoJdbcSpring">
+		<property name="jdbcTemplate" ref="jdbcTemplateBean" />
+	</bean>
+	<bean id="formateurDao" class="formation.dao.FormateurDaoJdbcSpring">
+		<property name="jdbcTemplate" ref="jdbcTemplateBean" />
+	</bean>
+		<bean id="salleDao" class="formation.dao.SalleDaoJdbcSpring">
+		<property name="jdbcTemplate" ref="jdbcTemplateBean" />
+	</bean>
+</beans>
