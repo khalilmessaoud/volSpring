@@ -8,13 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Login")
 public class Login {
 
 	private Long id;
+	@Size(min = 1, max = 50, message = "{loginEdit.login.obligatoire}")
 	private String login;
+	@Size(min = 1, max = 50, message = "{loginEdit.motDePasse.obligatoire}")
 	private String motDePasse;
 	private boolean admin;
 	private int version;
@@ -34,15 +37,19 @@ public class Login {
 	}
 
 	@Column(name = "login", length = 50, unique = true)
+	
 	public String getLogin() {
 		return login;
 	}
+
+	
 
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	@Column(name = "motdepasse", length = 50)
+	
 	public String getMotDePasse() {
 		return motDePasse;
 	}

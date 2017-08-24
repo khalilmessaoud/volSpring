@@ -12,20 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Reservation {
 
 	private Long id;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Future 
 	private Date dateResa;
-	@Size (min=1, max = 160, message="{reservationEdit.numero.obligatoire}")
-	private String numero;
+	private int numero;
 	private Passager passager;
 	private Vol vol;
 	private int version;
@@ -56,15 +49,15 @@ public class Reservation {
 	}
 
 	@Column(name = "numero")
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "passager_id")
 	public Passager getPassager() {
 		return passager;
@@ -73,8 +66,8 @@ public class Reservation {
 	public void setPassager(Passager passager) {
 		this.passager = passager;
 	}
-	//(fetch = FetchType.EAGER)
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vol_id")
 	public Vol getVol() {
 		return vol;

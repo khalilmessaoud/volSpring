@@ -5,6 +5,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Size;
 
 @Entity
 @DiscriminatorValue("ClientEI")
@@ -12,11 +13,12 @@ public class ClientEI extends Client {
 
 	private TitrePhysique titre;
 	private String prenom;
-	
+
 	public ClientEI() {
 	}
 
-	@Column(name="titre", length=10)
+	@Column(name = "titre", length = 10)
+	@Size(min = 1, max = 100, message = "{clientEdit.titre.obligatoire}")
 	@Enumerated(EnumType.STRING)
 	public TitrePhysique getTitre() {
 		return titre;
@@ -26,7 +28,7 @@ public class ClientEI extends Client {
 		this.titre = titre;
 	}
 
-	@Column(name="prenom",length=100)
+	@Column(name = "prenom", length = 100)
 	public String getPrenom() {
 		return prenom;
 	}

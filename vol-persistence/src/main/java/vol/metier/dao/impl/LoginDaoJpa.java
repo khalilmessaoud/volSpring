@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vol.metier.dao.LoginDao;
+import vol.metier.model.Client;
 import vol.metier.model.Login;
 
 @Transactional
@@ -41,7 +42,18 @@ public class LoginDaoJpa implements LoginDao {
 		Query query = em.createQuery("from Login l");
 		return query.getResultList();
 	}
-
+	@Override
+	@Transactional(readOnly=true)
+	public List<Login> findAllLoginClientMoral() {
+		Query query = em.createQuery("from ClientMoral c left outer join fetch c.login");
+		return query.getResultList();
+	}
+	@Override
+	@Transactional(readOnly=true)
+	public List<Login> findAllLoginClientPhysique() {
+		Query query = em.createQuery("from ClientPhysique c left outer join fetch c.login");
+		return query.getResultList();
+	}
 	@Override
 	public void create(Login login) {
 		em.persist(login);

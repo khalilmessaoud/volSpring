@@ -45,9 +45,7 @@ public class CompagnieAerienneDaoJpa implements CompagnieAerienneDao {
 
 	@Override
 	public void delete(CompagnieAerienne compagnieAerienne) {
-		em.merge(compagnieAerienne);
-		em.remove(em.contains(compagnieAerienne) ? compagnieAerienne : em.merge(compagnieAerienne));
-		//em.remove(em.merge(compagnieAerienne));
+		em.remove(em.merge(compagnieAerienne));
 
 	}
 }

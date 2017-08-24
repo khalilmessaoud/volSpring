@@ -52,9 +52,7 @@ public class CompagnieAerienneVolDaoJpa implements CompagnieAerienneVolDao {
 
 	@Override
 	public void delete(CompagnieAerienneVol cav) {
-		em.merge(cav);
-		em.remove(em.contains(cav) ? cav : em.merge(cav));
-		//em.remove(em.merge(cav));
+		em.remove(em.merge(cav));
 
 	}
 

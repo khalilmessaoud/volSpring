@@ -5,6 +5,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Size;
 
 @Entity
 @DiscriminatorValue("ClientMoral")
@@ -17,6 +18,7 @@ public class ClientMoral extends Client {
 	}
 	
 	@Column(name="titre")
+	//@Size(min = 1, max = 100, message = "{clientEdit.titre.obligatoire}")
 	@Enumerated(EnumType.STRING)
 	public TitreMoral getTitre() {
 		return titre;

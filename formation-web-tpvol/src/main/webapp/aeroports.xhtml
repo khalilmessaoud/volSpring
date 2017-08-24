@@ -5,38 +5,38 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title><h:outputText value="Liste des villes" /></title>
+	<title><h:outputText value="Liste des aéroports" /></title>
 </h:head>
 <h:body>
-	<p:panel header="Liste des villes" />
+	<p:panel header="Liste des aéroports" />
 	<h:form id="formulaire">
-		<p:dataTable value="#{villeBean.villes}" var="ville">
+		<p:dataTable value="#{aeroportBean.aeroports}" var="aeroport">
 		
 			<p:column>
 				<f:facet name="header">
 					<h:outputText value="ID" />
 				</f:facet>
-				<h:outputText value="#{ville.id}" />
+				<h:outputText value="#{aeroport.id}" />
 			</p:column>
 			
 			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Nom" />
 				</f:facet>
-				<h:outputText value="#{ville.nom}" />
+				<h:outputText value="#{aeroport.nom}" />
 			</p:column>
 			
 			 <p:column> 
-				<p:commandButton value="Editer la ville" action="#{villeBean.edit(ville.id)}" ajax="false"/>
+				<p:commandButton value="Editer la aeroport" action="#{aeroportBean.edit(aeroport.id)}" ajax="false"/>
 			</p:column>
 			<p:column> 
-				<p:commandButton value="Supprimer" action="#{villeBean.delete}"  ajax="false">
-					<f:setPropertyActionListener target="#{villeBean.villeId}"
-						value="#{ville.id}" />
+				<p:commandButton value="Supprimer" action="#{aeroportBean.delete}"  ajax="false">
+					<f:setPropertyActionListener target="#{aeroportBean.aeroportId}"
+						value="#{aeroport.id}" />
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		<p:commandButton icon="ui-icon-plus" value="Nouvelle ville" action="#{villeBean.add}"  ajax="false"/>
+		<p:commandButton icon="ui-icon-plus" value="Nouvelle aeroport" action="#{aeroportBean.add}"  ajax="false"/>
 	</h:form>
 </h:body>
 </html>

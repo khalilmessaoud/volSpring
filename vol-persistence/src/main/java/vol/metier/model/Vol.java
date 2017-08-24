@@ -3,7 +3,6 @@ package vol.metier.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-
-import org.hibernate.annotations.IndexColumn;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Vol {
@@ -46,12 +42,9 @@ public class Vol {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 
-	
 	@Column(name = "datedepart")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date getDateDepart() {
 		return dateDepart;
 	}
@@ -62,7 +55,6 @@ public class Vol {
 
 	@Column(name = "datearrivee")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date getDateArrivee() {
 		return dateArrivee;
 	}
@@ -73,7 +65,6 @@ public class Vol {
 
 	@Column(name = "heuredepart")
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="HHHH:mm")
 	public Date getHeureDepart() {
 		return heureDepart;
 	}
@@ -84,7 +75,6 @@ public class Vol {
 
 	@Column(name = "heurearrivee")
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="HHHH:mm")
 	public Date getHeureArrivee() {
 		return heureArrivee;
 	}
@@ -93,7 +83,7 @@ public class Vol {
 		this.heureArrivee = heureArrivee;
 	}
 
-	@OneToMany(mappedBy = "vol", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "vol", fetch = FetchType.LAZY)
 	public List<Escale> getEscales() {
 		return escales;
 	}
@@ -102,7 +92,7 @@ public class Vol {
 		this.escales = escales;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "depart_id")
 	public Aeroport getDepart() {
 		return depart;
@@ -112,7 +102,7 @@ public class Vol {
 		this.depart = depart;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "arrivee_id")
 	public Aeroport getArrivee() {
 		return arrivee;
@@ -130,9 +120,8 @@ public class Vol {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy was removed
-    @IndexColumn(name="INDEX_COL")
-	//@OneToMany(mappedBy = "vol", fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "vol", fetch = FetchType.LAZY)
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
@@ -140,11 +129,8 @@ public class Vol {
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
-	
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy was removed
-    @IndexColumn(name="INDEX_COL")
-	//@OneToMany(mappedBy = "id.vol", fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "id.vol", fetch = FetchType.LAZY)
 	public List<CompagnieAerienneVol> getCompagniesAerienneVol() {
 		return compagniesAerienneVol;
 	}
@@ -152,30 +138,5 @@ public class Vol {
 	public void setCompagniesAerienneVol(List<CompagnieAerienneVol> compagniesAerienneVol) {
 		this.compagniesAerienneVol = compagniesAerienneVol;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Vol other = (Vol) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
 
 }
