@@ -63,7 +63,8 @@ public class VilleDaoJpa implements VilleDao {
 
 	@Override
 	public void delete(Ville ville) {
-		em.refresh(ville);
+		ville = em.merge(ville);
+		
 		for(AeroportVille villeAeroport : ville.getAeroports()){
 			aeroportVilleDao.delete(villeAeroport);
 		}
