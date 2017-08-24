@@ -46,7 +46,6 @@ public class PassagerDaoJpa implements PassagerDao{
 		}
 	}
 	
-
 	@Override
 	@Transactional(readOnly = true)
 	public List<Passager> findAll() {
@@ -74,7 +73,6 @@ public class PassagerDaoJpa implements PassagerDao{
 		em.remove(passager);
 		
 	}
-
 
 
 }

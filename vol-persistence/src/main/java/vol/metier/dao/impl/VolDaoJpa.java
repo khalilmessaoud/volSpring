@@ -60,17 +60,37 @@ public class VolDaoJpa implements VolDao {
 
 	@Override
 	public void delete(Vol vol) {
-		em.refresh(vol);
-		for (Reservation resa : vol.getReservations()) {
+		//em.refresh(vol);
+		em.merge(vol);
+		System.out.println("etapa1 delete en VolDaoJpa");
+		/*for (Reservation resa : vol.getReservations()) {System.out.println("etapa2 delete en VolDaoJpa");
 			reservationDao.delete(resa);
-		}
-		for (Escale escale : vol.getEscales()) {
+		}*/
+		for (Escale escale : vol.getEscales()) {System.out.println("etapa3 delete en VolDaoJpa");
 			escaleDao.delete(escale);
 		}
-		for (CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()) {
+		
+		List<CompagnieAerienneVol> LCAX=compagnieAerienneVolDao.findAll();
+		for(int i=0;i<LCAX.size();i++){
+			if(LCAX.get(i).getId().getVol().equals(vol)){System.out.println("etapa 4 delete en VolDaoJpa");
+				
+				compagnieAerienneVolDao.delete(compagnieAerienneVolDao.find(LCAX.get(i).getId()));
+			}
+		}
+		List<Reservation> LR=reservationDao.findAll();
+		for(int i=0;i<LR.size();i++){System.out.println("Alternativa etapa2 bucle for i delete en VolDaoJpa");
+			if(LR.get(i).getVol().equals(vol)){
+				reservationDao.delete(reservationDao.find(LR.get(i).getId()));
+			}
+		}
+		
+		for (CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()) {System.out.println("etapa5delete en VolDaoJpa");
 			compagnieAerienneVolDao.delete(compagnieAerienneVol);
 		}
-		em.remove(vol);
+		System.out.println("etapa5  final avant remove delete en VolDaoJpa");
+		em.remove(em.contains(vol) ? vol : em.merge(vol));
+		System.out.println("etapa6  saliendo bien de delete en VolDaoJpa");
+		//em.remove(vol);
 
 	}
 
