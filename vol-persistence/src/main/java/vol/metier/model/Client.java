@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -26,13 +25,10 @@ import org.hibernate.validator.constraints.Email;
 public abstract class Client {
 
 	private Long id;
-	
 	private String nom;
-
 	private String numeroTel;
-	
 	private String numeroFax;
-	
+	@Email
 	private String email;
 	private Login login;
 	private Adresse adresse;

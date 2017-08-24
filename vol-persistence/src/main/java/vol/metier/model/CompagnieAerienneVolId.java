@@ -22,8 +22,8 @@ public class CompagnieAerienneVolId implements Serializable {
 		this.compagnieAerienne = compagnieAerienne;
 		this.vol = vol;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	//(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "vol_id")
 	public Vol getVol() {
 		return vol;
@@ -33,7 +33,7 @@ public class CompagnieAerienneVolId implements Serializable {
 		this.vol = vol;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "compagnieaerienne_Id")
 	public CompagnieAerienne getCompagnieAerienne() {
 		return compagnieAerienne;

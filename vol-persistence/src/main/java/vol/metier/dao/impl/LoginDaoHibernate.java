@@ -87,19 +87,4 @@ public class LoginDaoHibernate implements LoginDao {
 		}
 	}
 
-	@Override
-	@Transactional(readOnly=true)
-	public List<Login> findAllLoginClientMoral() {
-	//	Query query = em.createQuery("from ClientMoral c left outer join fetch c.login");
-		//return query.getResultList();
-		return null;
-	}
-	@Override
-	@Transactional(readOnly=true)
-	public List<Login> findAllLoginClientPhysique() {
-	//	Query query = em.createQuery("from ClientPhysique c left outer join fetch c.login");
-		//return query.getResultList();
-		return null;
-	}
-
 }

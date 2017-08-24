@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="
-           http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-           http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd
-       ">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<context:annotation-config />
-
+	
 	<context:component-scan base-package="vol.metier.dao" />
-
+	
 	<context:property-placeholder location="classpath:sgbd.properties" />
-
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -25,7 +27,8 @@
 		<property name="maxTotal" value="${db.maxPoolSize}" />
 	</bean>
 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="vol.metier.model" />
 		<property name="jpaVendorAdapter">
@@ -40,30 +43,28 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
+	
 	<!-- Activation de la translation d'exception  -->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"></bean>
-
-	<!-- Hibernate configuration -->
-
-	<!-- 	<bean id="sessionFactory" -->
-	<!-- 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
-	<!-- 		<property name="dataSource" ref="dataSource" /> -->
-	<!-- 		<property name="packagesToScan" value="tp" /> -->
-	<!-- 		<property name="hibernateProperties"> -->
-	<!-- 			<props> -->
-	<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> -->
-	<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
-	<!-- 				<prop key="hibernate.show_sql">true</prop> -->
-	<!-- 			</props> -->
-	<!-- 		</property> -->
-	<!-- 	</bean> -->
-
-	<!-- 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> -->
-	<!-- 		<property name="sessionFactory" ref="sessionFactory" /> -->
-	<!-- 	</bean> -->
-	<!-- Les messages de validation seront dans le message source -->
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-		<property name="validationMessageSource" ref="messageSource" />
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
 	</bean>
+	
+	<!-- Hibernate configuration -->
+	
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 		<property name="packagesToScan" value="tp" /> -->
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> -->
+<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> -->
+<!-- 		<property name="sessionFactory" ref="sessionFactory" /> -->
+<!-- 	</bean> -->
+
 </beans>

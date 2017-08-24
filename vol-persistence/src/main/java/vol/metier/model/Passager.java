@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+// tell her that you love her, if you really love her...
 
 @Entity
 public class Passager {
