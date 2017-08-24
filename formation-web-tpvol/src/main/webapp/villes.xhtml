@@ -30,7 +30,7 @@
 				<p:commandButton value="Editer la ville" action="#{villeBean.edit(ville.id)}" ajax="false"/>
 			</p:column>
 			<p:column> 
-				<p:commandButton value="Supprimer" action="#{ville.delete}"  ajax="false">
+				<p:commandButton value="Supprimer" action="#{villeBean.delete}"  ajax="false">
 					<f:setPropertyActionListener target="#{villeBean.villeId}"
 						value="#{ville.id}" />
 				</p:commandButton>

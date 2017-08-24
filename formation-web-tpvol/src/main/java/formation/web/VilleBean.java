@@ -51,8 +51,11 @@ public class VilleBean {
 
 	// Delete Ville
 	public String delete() {
-		// TO DO
-		return null;
+		ville = villeDao.find(villeId);
+
+		villeDao.delete(ville);
+
+		return "villes";
 
 	}
 
