@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="#{msg['cieAeriennes.title']}" /></title>
+</h:head>
+<h:body>
+	<h2>
+		<h:outputText value="#{msg['cieAeriennes.title']}" />
+	</h2>
+	<h:form id="formulaire">
+		<p:dataTable value="#{compagnieBean.cieAeriennes}" var="cieAerienne">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['cieAerienne.id']}" />
+				</f:facet>
+				<h:outputText value="#{cieAerienne.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['cieAerienne.nom']}" />
+				</f:facet>
+				<h:outputText value="#{cieAerienne.nom}" />
+			</p:column>
+			
+			<p:column> 
+				<p:commandLink value="#{msg['cieAerienne.modify']}" action="#{compagnieBean.edit(cieAerienne.id)}" ajax="false" />
+			</p:column>
+			<p:column> 
+				<p:commandLink value="#{msg['cieAerienne.delete']}" action="#{compagnieBean.delete}" ajax="false" >
+					<f:setPropertyActionListener target="#{compagnieBean.cieAerienneId}"
+						value="#{cieAerienne.id}" />
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+		<p:commandLink value="#{msg['cieAerienne.add']}" action="#{compagnieBean.add}" ajax="false"/>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="header">
+        <p:graphicImage name="/formation-web-jsf\src\main\webapp\images\telechargement.jpg" />
+   	 	</f:facet>
+	<title><h:outputText value="#{msg['cieAerienneEdit.title']}" /></title>
+</h:head>
+<h:body>
+	<h2>
+		<h:outputText value="#{msg['cieAerienneEdit.title']}" />
+	</h2>
+	<h:form id="formulaire">
+		<h:inputHidden id="id" value="#{compagnieBean.compagnieAerienne.id}"/>
+		<h:inputHidden id="version" value="#{compagnieBean.compagnieAerienne.version}"/>
+		
+		
+		<p:panelGrid >
+			<p:outputLabel for="nom" value="#{msg['cieAerienneEdit.nom']}" />
+			<p:inputText id="nom" value="#{compagnieBean.compagnieAerienne.nom}" required="true" requiredMessage="#{msg['cieAerienneEdit.nom.required']}"/>
+			<p:message for="nom"/>
+			
+			
+			
+			
+			<p:commandButton value="#{msg['cieAerienneEdit.valid']}" action="#{compagnieBean.save}"/>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
